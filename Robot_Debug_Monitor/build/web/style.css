@@ -1,0 +1,44 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 23, 2018, 1:20:47 PM
+    Author     : USER
+*/
+.container-fluid{
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    overflow: hidden;
+}
+
+h1{
+    padding: 3px 0px;
+    text-align: center;
+}
+
+.col-md-4{
+    height: 45vh;
+    background-color: aliceblue;
+    margin: 0px;
+    /*padding: 2px;*/
+    border: solid;
+    border-width: 1px;
+    /*border-left-color: white;*/
+    overflow: auto;
+}
+
+#image{
+    background-image: url("swarmRobots.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.col-md-4 h3{
+/*    background-color: wheat;*/
+    text-align: center;
+}
+
+
