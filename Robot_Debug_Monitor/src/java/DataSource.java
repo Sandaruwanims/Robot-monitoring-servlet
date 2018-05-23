@@ -12,12 +12,13 @@
  */
 
 
-public class Monitor {
+public class DataSource {
     
     private String message = null;
     
     
     final synchronized String readReadings(String serialPrint) throws InterruptedException {
+        
         message = serialPrint;
         notifyAll();
         return "Success";

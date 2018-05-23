@@ -23,7 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/RobotSerialData"})
 
 public class Serial_Monitor extends HttpServlet {
-    private final Monitor serialMonitor = new Monitor();;
+    
+    private final DataSource source = new DataSource();
+    
     @Override
     public void init() {
         ServletConfig config = getServletConfig();
@@ -36,18 +38,22 @@ public class Serial_Monitor extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
  
-            response.setContentType("text/event-stream,charset=UTF-8");
+        response.setContentType("text/event-stream,charset=UTF-8");
         
         try (final PrintWriter out = response.getWriter()) {
+            
             while (!Thread.interrupted()) {
-                synchronized (serialMonitor) {
-                    serialMonitor.wait();
+                
+                synchronized (source) {
+                    source.wait();
                     out.print("data: ");
-                    out.println(serialMonitor.getReadings());
+                    out.println(source.getReadings());
                     out.println();
                     out.flush();
-                 }
+                }
+                
             }
+            
         } catch (InterruptedException ex) {
 //            Logger.getLogger(Serial_Monitor.class.getName()).log(Level.SEVERE, null, ex);
         }    
@@ -65,18 +71,23 @@ public class Serial_Monitor extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String message = null;
+        String message = "faild";
         
         try {
-            message = serialMonitor.readReadings(request.getParameter("message"));
+            
+            message = source.readReadings(request.getParameter("message"));
+            
         } catch (InterruptedException ex) {
-            Logger.getLogger(Serial_Monitor.class.getName()).log(Level.SEVERE, null, ex);
+            
+//            Logger.getLogger(Serial_Monitor.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         
         try (final PrintWriter out = response.getWriter()) {
 
-                    out.println(message);
-                    out.flush();
+            out.println(message);
+            out.flush();
+                    
         }    
     }
 

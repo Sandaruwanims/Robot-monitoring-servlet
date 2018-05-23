@@ -23,10 +23,13 @@ h1{
     height: 45vh;
     background-color: aliceblue;
     margin: 0px;
-    /*padding: 2px;*/
     border: solid;
     border-width: 1px;
-    /*border-left-color: white;*/
+}
+
+.col{
+    height: 85%;
+    width: 100%;
     overflow: auto;
 }
 
@@ -37,7 +40,7 @@ h1{
 }
 
 .col-md-4 h3{
-/*    background-color: wheat;*/
+    
     text-align: center;
 }
 
